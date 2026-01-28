@@ -1,0 +1,14 @@
+@;
+@; Author: Santiago Romaní Also
+@;
+
+RSI_Timer0:           @; se activa 1 vez por segundo
+    push {r0-r2, lr}
+    ldr r0, =ra_objetivo
+    ldr r1, [r0]
+    add r1, #1        @; incrementa ra_objetivo
+    ldr r2, =86400
+    cmp r1, r2
+    subge r1, r2      @; ajuste circular
+    str r1, [r0]
+    pop {r0-r2, pc}
